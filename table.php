@@ -37,15 +37,65 @@ $students = [
         'stdName' => 'Mohammed ahmed',
         'stdEmail' => 'mohamed@gmail.com',
         'stdGAP' => 98.7
+    ],
+    [   
+        '#' => '6',
+        'stdNo' => '20007',
+        'stdName' => 'Rami Hassan',
+        'stdEmail' => 'rami@gmail.com',
+        'stdGAP' => 68.5
+    ],
+    [   
+        '#' => '7',
+        'stdNo' => '20009',
+        'stdName' => 'Ahlam Anan',
+        'stdEmail' => 'ahlam@gmail.com',
+        'stdGAP' => 99.7
+    ],
+    [   
+        '#' => '8',
+        'stdNo' => '10003',
+        'stdName' => 'Rawan hamad',
+        'stdEmail' => 'rawan@gmail.com',
+        'stdGAP' => 80.3
+    ],
+    [   
+        '#' => '9',
+        'stdNo' => '20006',
+        'stdName' => 'Ahmed Khader',
+        'stdEmail' => 'ahmed05@gmail.com',
+        'stdGAP' => 86.4
+    ],
+    [   
+        '#' => '10',
+        'stdNo' => '20004',
+        'stdName' => 'Ihab Halaq',
+        'stdEmail' => 'ihab@gmail.com',
+        'stdGAP' => 90.3
+    ],
+    [   
+        '#' => '11',
+        'stdNo' => '10008',
+        'stdName' => 'Hala Madhoun',
+        'stdEmail' => 'hala@gmail.com',
+        'stdGAP' => 60.1
+    ],
+    [   
+        '#' => '12',
+        'stdNo' => '10007',
+        'stdName' => 'Alaa Adhan',
+        'stdEmail' => 'alaa@gmail.com',
+        'stdGAP' => 97.1
     ]
+
 ];
  
-$maxGPA = max(array_column($students, 'stdGAP'));                                       #Get the highest GPA
-$avgGPA = array_sum(array_column($students, 'stdGAP')) / count($students);              #Calculate the average GPA
+
 ?>
 
 
-<?php#Use a ready-made template with HTML?>
+
+<?php # Use a ready-made template with HTML ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +107,7 @@ $avgGPA = array_sum(array_column($students, 'stdGAP')) / count($students);      
 
     <style>
         body {
-            background-color: #e6e7e7ff;
+            background: #f8effaff;
         }
 
         table {
@@ -102,15 +152,17 @@ $avgGPA = array_sum(array_column($students, 'stdGAP')) / count($students);      
                 $highlighted = "";      #Default: without color
                 
                 
-                if($student["stdGAP"] == 98.7) {
+                if($student["stdGAP"] >= 90) {
+                    $highlighted = "table-success";
+                }
+
+                elseif($student["stdGAP"] >= 80) {
                     $highlighted = "table-info";
                 }
 
-                elseif($student["stdGAP"] == 88.7) {
+                elseif($student["stdGAP"] >= 70) {
                     $highlighted = "table-warning";
-                }
-
-                elseif($student["stdGAP"] == 78.5) {
+                } else {
                     $highlighted = "table-danger";
                 }
 
@@ -122,7 +174,7 @@ $avgGPA = array_sum(array_column($students, 'stdGAP')) / count($students);      
                 <td><?= $student["stdNo"] ?></td>
                 <td>
                     <?= $student["stdName"] ?>
-                    <?= ($student["stdGAP"] == $maxGPA) ? " 🥇" : "" ?>
+                    <?= ($student["stdGAP"] >= 90) ? " 🥇" : "" ?>
                 </td>
                 <td><?= $student["stdEmail"] ?></td>
                 <td><?= $student["stdGAP"] ?></td>
@@ -149,28 +201,33 @@ $avgGPA = array_sum(array_column($students, 'stdGAP')) / count($students);      
         <!-- Flex container to arrange the color boxes horizontally -->
         <div style="display: flex; gap: 20px; align-items: center;">
 
-            <!-- First color box: GPA = 98.7 -->
+            <!-- A (90 - 100) -->
             <div style="display: flex; align-items: center; gap: 5px;">
-                <div style="width: 20px; height: 20px; background-color: #cfe2ff; border: 1px solid #000;"></div>
-                <span style="font-weight: 600;" >GPA = A+</span>
+                <div style="width: 20px; height: 20px; background-color: #d1e7dd; border: 1px solid #000;"></div>
+                <span style="font-weight: 600;" >A (90 - 100)</span>
             </div>
             
-            <!-- Second color box: GPA = 88.7 -->
+            <!-- B (80 - 89) -->
             <div style="display: flex; align-items: center; gap: 5px;">
-                <div style="width: 20px; height: 20px; background-color: #fff3cd; border: 1px solid #000;"></div>
-                <span style="font-weight: 600;" >GPA = B</span>
+                <div style="width: 20px; height: 20px; background-color: #cff4fc; border: 1px solid #000;"></div>
+                <span style="font-weight: 600;" >B (80 - 89)</span>
             </div>
 
-            <!-- Third color box: GPA = 78.5 -->
+            <!-- C (70 - 79) -->
+            <div style="display: flex; align-items: center; gap: 5px;">
+                <div style="width: 20px; height: 20px; background-color: #fff3cd; border: 1px solid #000;"></div>
+                <span style="font-weight: 600;" >C (70 - 79)</span>
+            </div>
+
+            <!-- F (< 70)  -->
             <div style="display: flex; align-items: center; gap: 5px;">
                 <div style="width: 20px; height: 20px; background-color: #f8d7da; border: 1px solid #000;"></div>
-                <span style="font-weight: 600;" >GPA = C</span>
+                <span style="font-weight: 600;" >F (&lt; 70)</span>
             </div>
+
         </div>
     </div>
 
     <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
